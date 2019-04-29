@@ -109,10 +109,6 @@ static int modifier_bit(int key) {
 //from: https://github.com/kentonv/dvorak-qwerty/tree/master/unix
 static int qwerty2dvorak(int key) {
     switch (key) {
-        case 12:
-            return 40;
-        case 13:
-            return 27;
         case 16:
             return 45;
         case 17:
