@@ -183,46 +183,6 @@ static int qwerty2dvorak(int key) {
     return key;
 }
 
-static int isDvorakLayout() {
-
-    //get keyboard layout, heavily inspired by:
-    //https://github.com/luminousmen/xkblang/blob/master/src/xkblang.c
-    Display *d;
-
-    //check keyboard layout preparation
-    if (!(d = XOpenDisplay(NULL))) {
-        fprintf(stderr, "cannot open display\n");
-        return EXIT_FAILURE;
-    }
-
-    XkbDescPtr keyboard = XkbAllocKeyboard();
-    if (!keyboard) {
-        fprintf(stderr, "Error creating keyboard description");
-        return EXIT_FAILURE;
-    }
-
-    if (XkbGetNames(d, XkbGroupNamesMask, keyboard) != Success ) {
-        fprintf(stderr, "Error obtaining symbolic names");
-        return EXIT_FAILURE;
-    }
-
-    XkbStateRec state;
-    if( XkbGetState(d, XkbUseCoreKbd, &state) != Success ) {
-        fprintf(stderr, "Error getting keyboard state");
-        return EXIT_FAILURE;
-    }
-
-    char *name =  XGetAtomName(d, keyboard->names->groups[state.group]);
-
-    printf( "%s\n", name);
-
-    XFree(name);
-    XkbFreeNames(keyboard, XkbGroupNamesMask, True);
-    //free up: https://gist.github.com/fikovnik/ef428e82a26774280c4fdf8f96ce8eeb
-    XCloseDisplay(d);
-    return 1;
-}
-
 int main(int argc, char *argv[]) {
 
     setuid(0);
