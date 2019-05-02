@@ -131,8 +131,6 @@ static int qwerty2dvorak(int key) {
             return 19;
         case 26:
             return 12;
-        case 27:
-            return 13;
         case 30:
             return 30;
         case 31:
@@ -174,7 +172,7 @@ static int qwerty2dvorak(int key) {
         case 52:
             return 18;
         case 53:
-            return 26;
+            return 40;
     }
     return key;
 }
